@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
+import ThemeProvider from "@/components/theme/ThemeProvider";
 import Navbar from "@/components/header/Navbar";
 import Container from "@/components/Container";
 
@@ -23,11 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
-        <Navbar />
+        <ThemeProvider>
+          <Navbar />
 
-        <Container className="py-16">{children}</Container>
+          <Container className="py-16">{children}</Container>
+        </ThemeProvider>
       </body>
     </html>
   );
