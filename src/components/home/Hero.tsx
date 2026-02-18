@@ -5,7 +5,7 @@ import HeroCarousel from "@/components/home/HeroCarousel";
 
 export default function Hero() {
   return (
-    <div className="grid lg:grid-cols-2 gap-24">
+    <div className="grid lg:grid-cols-2 items-center gap-16">
       <div className="flex flex-col items-center lg:items-start gap-8">
         <h2 className="text-4xl lg:text-5xl text-center lg:text-left  font-black tracking-tight">
           We are changing the way people shop
@@ -17,7 +17,7 @@ export default function Hero() {
           maxime dolore.
         </p>
 
-        <Button asChild size="lg" className="w-full md:w-auto">
+        <Button asChild size="lg">
           <Link href="/products">Our Products</Link>
         </Button>
       </div>

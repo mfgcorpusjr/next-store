@@ -29,7 +29,7 @@ export default function RootLayout({
         <ThemeProvider>
           <Navbar />
 
-          <Container className="py-24">{children}</Container>
+          <Container className="py-16">{children}</Container>
         </ThemeProvider>
       </body>
     </html>

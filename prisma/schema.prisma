@@ -7,7 +7,14 @@ datasource db {
   provider = "postgresql"
 }
 
-model Test {
+model Product {
   id String @id @default(uuid())
   name String
+  company String
+  price Int
+  image String
+  description String
+  isFeatured Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
