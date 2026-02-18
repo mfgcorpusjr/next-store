@@ -1,3 +1,11 @@
+import { Input } from "@/components/ui/input";
+
 export default function Search() {
-  return <div>Search</div>;
+  return (
+    <Input
+      type="search"
+      placeholder="Search product"
+      className="max-w-xs dark:bg-muted"
+    />
+  );
 }
