@@ -15,7 +15,7 @@ export default function ProductGridItem({ product }: ProductGridItemProps) {
   return (
     <div className="relative">
       <Link href={`/products/${product.id}`}>
-        <Card className="group pt-0 overflow-hidden">
+        <Card className="group pt-0 overflow-hidden shadow-none">
           <CardHeader className="p-0">
             <div className="relative h-64 md:h-48">
               <Image

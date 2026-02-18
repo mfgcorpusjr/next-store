@@ -23,7 +23,7 @@ export default function HeroCarousel() {
         <CarouselContent>
           {images.map((image, index) => (
             <CarouselItem key={index}>
-              <Card className="p-1">
+              <Card className="p-1 shadow-none">
                 <CardContent className="p-1">
                   <Image
                     src={image}

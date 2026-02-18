@@ -15,7 +15,7 @@ export default function ProductListItem({ product }: ProductListItemProps) {
   return (
     <div className="relative">
       <Link href={`/products/${product.id}`}>
-        <Card className="group p-0 overflow-hidden">
+        <Card className="group p-0 overflow-hidden shadow-none">
           <CardContent className="flex gap-8 p-0">
             <Image
               src={product.image}
