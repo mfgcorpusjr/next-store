@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { LucideTextAlignJustify } from "lucide-react";
 import { SignedOut, SignedIn, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 import {
   DropdownMenu,
@@ -15,7 +16,9 @@ import SignOutLink from "@/components/header/SignOutLink";
 
 import { links } from "./utils/data";
 
-export default function LinksDropdown() {
+export default async function LinksDropdown() {
+  const { userId } = await auth();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -44,11 +47,20 @@ export default function LinksDropdown() {
         </SignedOut>
 
         <SignedIn>
-          {links.map((link) => (
-            <DropdownMenuItem asChild key={link.href}>
-              <Link href={link.href}>{link.label}</Link>
-            </DropdownMenuItem>
-          ))}
+          {links.map((link) => {
+            if (
+              link.href === "/admin" &&
+              userId !== process.env.ADMIN_USER_ID
+            ) {
+              return null;
+            }
+
+            return (
+              <DropdownMenuItem asChild key={link.href}>
+                <Link href={link.href}>{link.label}</Link>
+              </DropdownMenuItem>
+            );
+          })}
 
           <DropdownMenuSeparator />
 

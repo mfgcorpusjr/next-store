@@ -15,7 +15,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           <Sidebar />
         </div>
 
-        <div className="lg:col-span-10 p-4">{children}</div>
+        <div className="lg:col-span-10 p-4 pt-0">{children}</div>
       </div>
     </div>
   );
