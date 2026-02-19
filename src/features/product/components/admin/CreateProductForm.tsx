@@ -1,10 +1,7 @@
 "use client";
 
-import { useTransition } from "react";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
 
 import FormInput from "@/components/form/FormInput";
 import FormInputFile from "@/components/form/FormInputFile";
@@ -16,11 +13,10 @@ import {
   createProductSchema,
   CreateProductFormData,
 } from "@/features/product/utils/schemas";
-import { createProduct } from "@/features/product/utils/actions";
+import useCreateProduct from "@/features/product/hooks/useCreateProduct";
 
 export default function CreateProductForm() {
-  const [isPending, startTransition] = useTransition();
-  const router = useRouter();
+  const { isPending, handleCreateProduct } = useCreateProduct();
 
   const form = useForm<CreateProductFormData>({
     resolver: zodResolver(createProductSchema),
@@ -33,27 +29,6 @@ export default function CreateProductForm() {
       isFeatured: false,
     },
   });
-
-  const handleCreateProduct = async (formData: CreateProductFormData) => {
-    startTransition(async () => {
-      const data = new FormData();
-      data.append("name", formData.name);
-      data.append("company", formData.company);
-      data.append("price", String(formData.price));
-      data.append("image", formData.image);
-      data.append("description", formData.description);
-      data.append("isFeatured", String(formData.isFeatured));
-
-      const res = await createProduct(data);
-
-      if (res.status === "SUCCESS") {
-        toast.success(res.message);
-        router.push("/admin/products");
-      } else {
-        toast.error(res.message);
-      }
-    });
-  };
 
   return (
     <form
