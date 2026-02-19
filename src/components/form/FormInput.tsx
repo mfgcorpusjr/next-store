@@ -4,18 +4,18 @@ import { Control, Controller } from "react-hook-form";
 import { Field, FieldLabel, FieldError } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
-type FormInputTextProps = {
+type FormInputProps = {
   name: string;
   control: Control<any>;
   label?: string;
 } & ComponentProps<typeof Input>;
 
-export default function FormInputText({
+export default function FormInput({
   name,
   control,
   label,
   ...rest
-}: FormInputTextProps) {
+}: FormInputProps) {
   return (
     <Controller
       name={name}
@@ -29,6 +29,7 @@ export default function FormInputText({
             {...field}
             id={name}
             aria-invalid={fieldState.invalid}
+            value={field.value ?? ""}
           />
 
           {fieldState.invalid && (

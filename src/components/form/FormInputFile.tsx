@@ -1,21 +1,21 @@
 import { ComponentProps } from "react";
-import { Control, Controller } from "react-hook-form";
+import { Controller, Control } from "react-hook-form";
 
 import { Field, FieldLabel, FieldError } from "@/components/ui/field";
-import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 
-type FormTextareaProps = {
+type FormInputFileProps = {
   name: string;
   control: Control<any>;
   label?: string;
-} & ComponentProps<typeof Textarea>;
+} & ComponentProps<typeof Input>;
 
-export default function FormTextarea({
+export default function FormInputFile({
   name,
   control,
   label,
   ...rest
-}: FormTextareaProps) {
+}: FormInputFileProps) {
   return (
     <Controller
       name={name}
@@ -24,12 +24,12 @@ export default function FormTextarea({
         <Field data-invalid={fieldState.invalid}>
           {label && <FieldLabel htmlFor={name}>{label}</FieldLabel>}
 
-          <Textarea
+          <Input
             {...rest}
-            {...field}
             id={name}
             aria-invalid={fieldState.invalid}
-            value={field.value ?? ""}
+            type="file"
+            onChange={(e) => field.onChange(e.target.files?.[0])}
           />
 
           {fieldState.invalid && (

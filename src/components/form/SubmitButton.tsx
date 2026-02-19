@@ -4,16 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 
 type SubmitButtonProps = {
-  isLoading?: boolean;
+  isPending?: boolean;
 } & ComponentProps<typeof Button>;
 
 export default function SubmitButton({
-  isLoading,
+  isPending,
   ...rest
 }: SubmitButtonProps) {
   return (
-    <Button {...rest} type="submit" disabled={isLoading}>
-      {isLoading && <Spinner data-icon="inline-start" />}
+    <Button {...rest} type="submit" disabled={isPending}>
+      {isPending && <Spinner data-icon="inline-start" />}
 
       {rest.children}
     </Button>
