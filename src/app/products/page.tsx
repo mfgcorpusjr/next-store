@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import SectionTitle from "@/components/SectionTitle";
+import Section from "@/components/Section";
 import EmptyList from "@/components/EmptyList";
 import ProductGrid from "@/features/product/components/ProductGrid";
 import ProductList from "@/features/product/components/ProductList";
@@ -27,16 +27,12 @@ export default async function ProductsPage({
   const length = products.length;
 
   return (
-    <div className="space-y-8">
-      <SectionTitle
-        text={`${length} product${length > 1 ? "s" : ""}`}
-        rightContent={
-          length > 0 && (
-            <ProductDisplaySwitcher search={search} layout={layout} />
-          )
-        }
-      />
-
+    <Section
+      title={`${length} product${length > 1 ? "s" : ""}`}
+      rightContent={
+        length > 0 && <ProductDisplaySwitcher search={search} layout={layout} />
+      }
+    >
       {length === 0 && <EmptyList />}
 
       {length > 0 && layout === "grid" && <ProductGrid products={products} />}
@@ -52,6 +48,6 @@ export default async function ProductsPage({
           </div>
         </>
       )}
-    </div>
+    </Section>
   );
 }

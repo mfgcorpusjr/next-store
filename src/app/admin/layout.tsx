@@ -1,4 +1,4 @@
-import SectionTitle from "@/components/SectionTitle";
+import Section from "@/components/Section";
 import Sidebar from "@/components/admin/Sidebar";
 
 type AdminLayoutProps = {
@@ -7,16 +7,14 @@ type AdminLayoutProps = {
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
-    <div className="space-y-8">
-      <SectionTitle text="Admin" />
-
+    <Section title="Admin">
       <div className="grid lg:grid-cols-12 gap-8">
         <div className="lg:col-span-2">
           <Sidebar />
         </div>
 
-        <div className="lg:col-span-10 p-4 pt-0">{children}</div>
+        <div className="lg:col-span-10">{children}</div>
       </div>
-    </div>
+    </Section>
   );
 }
