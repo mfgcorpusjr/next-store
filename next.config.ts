@@ -4,7 +4,10 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   images: {
-    remotePatterns: [{ hostname: "images.pexels.com" }],
+    remotePatterns: [
+      { hostname: "images.pexels.com" },
+      { hostname: "ydcrinvaenahrvntitoi.supabase.co" },
+    ],
   },
 };
 
