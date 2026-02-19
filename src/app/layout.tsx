@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import ThemeProvider from "@/components/theme/ThemeProvider";
+import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/header/Navbar";
 import Container from "@/components/Container";
 
@@ -30,6 +31,8 @@ export default function RootLayout({
           <Navbar />
 
           <Container className="py-16">{children}</Container>
+
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
