@@ -1,6 +1,6 @@
 export const PRODUCTS = [
   {
-    name: "avant-garde lamp",
+    name: "Avant-garde lamp",
     company: "Modenza",
     price: 100,
     image:
@@ -10,7 +10,7 @@ export const PRODUCTS = [
     isFeatured: true,
   },
   {
-    name: "chic chair",
+    name: "Chic chair",
     company: "Luxora",
     price: 200,
     image:
@@ -20,7 +20,7 @@ export const PRODUCTS = [
     isFeatured: true,
   },
   {
-    name: "comfy bed",
+    name: "Comfy bed",
     company: "Homestead",
     price: 300,
     image:
@@ -30,7 +30,7 @@ export const PRODUCTS = [
     isFeatured: true,
   },
   {
-    name: "contemporary sofa",
+    name: "Contemporary sofa",
     company: "Comfora",
     price: 400,
     image:
