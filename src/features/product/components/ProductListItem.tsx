@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import ToggleFavoriteButton from "@/features/favorite/components/ToggleFavoriteButton";
 
 import { Product } from "@/generated/prisma/client";
