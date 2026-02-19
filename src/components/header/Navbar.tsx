@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import Container from "@/components/Container";
 import Logo from "@/components/header/Logo";
 import Search from "@/components/header/Search";
@@ -11,7 +13,9 @@ export default function Navbar() {
       <Container className="flex flex-col items-center gap-8 md:flex-row md:justify-between md:gap-4 py-8">
         <Logo />
 
-        <Search />
+        <Suspense>
+          <Search />
+        </Suspense>
 
         <div className="flex items-center gap-4">
           <CartButton />

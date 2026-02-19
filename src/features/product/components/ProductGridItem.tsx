@@ -32,6 +32,8 @@ export default function ProductGridItem({ product }: ProductGridItemProps) {
           <CardContent className="space-y-2">
             <h4 className="font-semibold">{product.name}</h4>
 
+            <p className="text-xs text-muted-foreground">{product.company}</p>
+
             <p className="text-sm text-muted-foreground">
               {formatCurrency(product.price)}
             </p>

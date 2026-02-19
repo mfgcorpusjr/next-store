@@ -29,7 +29,7 @@ export default function ProductListItem({ product }: ProductListItemProps) {
             <div className="flex-1 p-4 space-y-2">
               <h4 className="font-semibold">{product.name}</h4>
 
-              <p className="text-sm text-muted-foreground">{product.company}</p>
+              <p className="text-xs text-muted-foreground">{product.company}</p>
 
               <p className="text-sm text-muted-foreground">
                 {formatCurrency(product.price)}
