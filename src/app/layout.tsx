@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
+import { ClerkProvider } from "@clerk/nextjs";
 import ThemeProvider from "@/components/theme/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/header/Navbar";
@@ -25,16 +26,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
-        <ThemeProvider>
-          <Navbar />
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className={`${inter.className} antialiased`}>
+          <ThemeProvider>
+            <Navbar />
 
-          <Container className="py-16">{children}</Container>
+            <Container className="py-16">{children}</Container>
 
-          <Toaster />
-        </ThemeProvider>
-      </body>
-    </html>
+            <Toaster />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
