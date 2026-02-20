@@ -9,7 +9,7 @@ const useUpdateProduct = () => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
-  const handleUpdateProduct = ({
+  const handleUpdate = ({
     id,
     formData,
   }: {
@@ -30,7 +30,7 @@ const useUpdateProduct = () => {
 
   return {
     isPending,
-    handleUpdateProduct,
+    handleUpdate,
   };
 };
 

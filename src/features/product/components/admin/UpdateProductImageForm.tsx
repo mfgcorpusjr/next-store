@@ -21,7 +21,7 @@ type UpdateProductImageFormProps = {
 export default function UpdateProductImageForm({
   product,
 }: UpdateProductImageFormProps) {
-  const { isPending, handleUpdateProductImage } = useUpdateProductImage();
+  const { isPending, handleUpdate } = useUpdateProductImage();
 
   const form = useForm<UpdateProductImageFormData>({
     resolver: zodResolver(updateProductImageSchema),
@@ -34,7 +34,7 @@ export default function UpdateProductImageForm({
     <form
       className="flex flex-col items-start gap-4"
       onSubmit={form.handleSubmit((formData: UpdateProductImageFormData) =>
-        handleUpdateProductImage({ id: product.id, formData }),
+        handleUpdate({ id: product.id, formData }),
       )}
     >
       <Image

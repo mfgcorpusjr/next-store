@@ -17,7 +17,7 @@ import {
 import useCreateProduct from "@/features/product/hooks/useCreateProduct";
 
 export default function CreateProductForm() {
-  const { isPending, handleCreateProduct } = useCreateProduct();
+  const { isPending, handleCreate } = useCreateProduct();
 
   const form = useForm<CreateProductFormData>({
     resolver: zodResolver(createProductSchema),
@@ -38,10 +38,7 @@ export default function CreateProductForm() {
       </CardHeader>
 
       <CardContent>
-        <form
-          className="space-y-4"
-          onSubmit={form.handleSubmit(handleCreateProduct)}
-        >
+        <form className="space-y-4" onSubmit={form.handleSubmit(handleCreate)}>
           <div className="grid md:grid-cols-2 gap-4">
             <FormInput name="name" control={form.control} label="Name" />
 

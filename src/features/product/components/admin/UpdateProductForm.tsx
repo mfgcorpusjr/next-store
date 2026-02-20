@@ -22,7 +22,7 @@ type UpdateProductFormProps = {
 };
 
 export default function UpdateProductForm({ product }: UpdateProductFormProps) {
-  const { isPending, handleUpdateProduct } = useUpdateProduct();
+  const { isPending, handleUpdate } = useUpdateProduct();
 
   const form = useForm<UpdateProductFormData>({
     resolver: zodResolver(updateProductSchema),
@@ -47,7 +47,7 @@ export default function UpdateProductForm({ product }: UpdateProductFormProps) {
         <form
           className="space-y-4"
           onSubmit={form.handleSubmit((formData: UpdateProductFormData) =>
-            handleUpdateProduct({ id: product.id, formData }),
+            handleUpdate({ id: product.id, formData }),
           )}
         >
           <div className="grid md:grid-cols-2 gap-4">

@@ -18,7 +18,7 @@ type CreateReviewFormProps = {
 };
 
 export default function CreateReviewForm({ productId }: CreateReviewFormProps) {
-  const { isPending, handleCreateReview } = useCreateReview();
+  const { isPending, handleCreate } = useCreateReview();
 
   const form = useForm<CreateReviewFormData>({
     resolver: zodResolver(createReviewSchema),
@@ -32,7 +32,7 @@ export default function CreateReviewForm({ productId }: CreateReviewFormProps) {
     <form
       className="flex flex-col items-start gap-4"
       onSubmit={form.handleSubmit((formData: CreateReviewFormData) =>
-        handleCreateReview({ productId, formData }),
+        handleCreate({ productId, formData }),
       )}
     >
       <div className="w-full max-w-96">

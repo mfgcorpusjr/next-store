@@ -7,7 +7,7 @@ import { createReview } from "@/features/review/utils/actions";
 const useCreateReview = () => {
   const [isPending, startTransition] = useTransition();
 
-  const handleCreateReview = ({
+  const handleCreate = ({
     productId,
     formData,
   }: {
@@ -27,7 +27,7 @@ const useCreateReview = () => {
 
   return {
     isPending,
-    handleCreateReview,
+    handleCreate,
   };
 };
 
