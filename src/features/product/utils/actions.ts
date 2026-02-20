@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
 import prisma from "@/lib/prisma";
-import { renderError, uploadImage } from "@/utils/actions";
+import { renderError, uploadImage, deleteImage } from "@/utils/actions";
 import {
   createProductSchema,
   updateProductSchema,
@@ -113,11 +113,13 @@ export const updateProduct = async ({
 
 export const deleteProduct = async (id: string) => {
   try {
-    await prisma.product.delete({
+    const product = await prisma.product.delete({
       where: {
         id,
       },
     });
+
+    await deleteImage({ imagePath: product.image });
 
     revalidatePath("/admin/products");
 

@@ -37,3 +37,17 @@ export const uploadImage = async ({
 
   throw new Error(error.message);
 };
+
+export const deleteImage = async ({
+  bucket = "uploads",
+  imagePath,
+}: {
+  bucket?: string;
+  imagePath: string;
+}) => {
+  const path = imagePath.split("/").pop() ?? "";
+
+  const { error } = await supabase.storage.from(bucket).remove([path]);
+
+  if (error) throw new Error(error.message);
+};
