@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 import prisma from "@/lib/prisma";
 import { renderError, uploadImage } from "@/utils/actions";
@@ -72,6 +73,25 @@ export const createProduct = async (formData: FormData) => {
     return {
       status: "SUCCESS",
       message: "Product created",
+    };
+  } catch (e) {
+    return renderError(e);
+  }
+};
+
+export const deleteProduct = async (id: string) => {
+  try {
+    await prisma.product.delete({
+      where: {
+        id,
+      },
+    });
+
+    revalidatePath("/admin/products");
+
+    return {
+      status: "SUCCESS",
+      message: "Product deleted",
     };
   } catch (e) {
     return renderError(e);

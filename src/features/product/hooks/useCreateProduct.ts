@@ -9,7 +9,7 @@ const useCreateProduct = () => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
-  const handleCreateProduct = async (formData: CreateProductFormData) => {
+  const handleCreateProduct = (formData: CreateProductFormData) => {
     startTransition(async () => {
       const data = new FormData();
       data.append("name", formData.name);
