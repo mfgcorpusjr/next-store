@@ -1,19 +1,19 @@
 import { useTransition } from "react";
-import { usePathname } from "next/navigation";
 import { toast } from "sonner";
 
 import { toggleFavorite } from "@/features/favorite/utils/actions";
 
 const useToggleFavorite = () => {
   const [isPending, startTransition] = useTransition();
-  const pathname = usePathname();
 
   const handleToggleFavorite = ({
     id,
     productId,
+    pathname,
   }: {
     id?: string;
     productId: string;
+    pathname: string;
   }) => {
     startTransition(async () => {
       const res = await toggleFavorite({ id, productId, pathname });

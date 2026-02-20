@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
 
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ export default function ToggleFavoriteButton({
   id,
   productId,
 }: ToggleFavoriteButtonProps) {
+  const pathname = usePathname();
   const { isPending, handleToggleFavorite } = useToggleFavorite();
 
   return (
@@ -24,7 +26,7 @@ export default function ToggleFavoriteButton({
       size="icon-sm"
       className="cursor-pointer"
       disabled={isPending}
-      onClick={() => handleToggleFavorite({ id, productId })}
+      onClick={() => handleToggleFavorite({ id, productId, pathname })}
     >
       {isPending ? (
         <Spinner />
