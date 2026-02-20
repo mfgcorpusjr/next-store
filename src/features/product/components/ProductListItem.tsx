@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { Card, CardContent } from "@/components/ui/card";
-import ToggleFavoriteButton from "@/features/favorite/components/ToggleFavoriteButton";
+import ToggleFavoriteButtonContainer from "@/features/favorite/components/ToggleFavoriteButtonContainer";
 
 import { Product } from "@/generated/prisma/client";
 import { formatCurrency } from "@/utils/format";
@@ -40,7 +40,7 @@ export default function ProductListItem({ product }: ProductListItemProps) {
       </Link>
 
       <div className="absolute top-4 right-4">
-        <ToggleFavoriteButton productId={product.id} />
+        <ToggleFavoriteButtonContainer productId={product.id} />
       </div>
     </div>
   );

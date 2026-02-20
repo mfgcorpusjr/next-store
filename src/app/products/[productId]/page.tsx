@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 
 import ProductBreadcrumb from "@/features/product/components/ProductBreadcrumb";
-import ToggleFavoriteButton from "@/features/favorite/components/ToggleFavoriteButton";
+import ToggleFavoriteButtonContainer from "@/features/favorite/components/ToggleFavoriteButtonContainer";
 import ProductRating from "@/features/product/components/ProductRating";
 import AddToCartButton from "@/features/cart/components/AddToCartButton";
 
@@ -55,7 +55,7 @@ export default async function ProductDetailsPage({
                 {product.name}
               </h4>
 
-              <ToggleFavoriteButton productId={product.id} />
+              <ToggleFavoriteButtonContainer productId={product.id} />
             </div>
 
             <ProductRating productId={product.id} />

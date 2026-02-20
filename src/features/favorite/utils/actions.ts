@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getUserIdOrRedirect, renderError } from "@/utils/actions";
 
-export const isFavorite = async (productId: string) => {
+export const getFavorite = async (productId: string) => {
   const userId = await getUserIdOrRedirect();
 
   const favorite = await prisma.favorite.findFirst({
@@ -15,31 +15,48 @@ export const isFavorite = async (productId: string) => {
     },
   });
 
-  return !!favorite;
+  return favorite;
+};
+
+export const getFavorites = async () => {
+  const userId = await getUserIdOrRedirect();
+
+  const favorites = await prisma.favorite.findMany({
+    include: {
+      product: true,
+    },
+    where: {
+      clerkId: userId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return favorites;
 };
 
 export const toggleFavorite = async ({
+  id,
   productId,
-  isFavorite,
   pathname,
 }: {
+  id?: string;
   productId: string;
-  isFavorite: boolean;
   pathname: string;
 }) => {
   try {
-    const userId = await getUserIdOrRedirect();
-
-    if (isFavorite) {
-      await prisma.favorite.create({
-        data: {
-          clerkId: userId,
-          productId,
+    if (id) {
+      await prisma.favorite.delete({
+        where: {
+          id,
         },
       });
     } else {
-      await prisma.favorite.deleteMany({
-        where: {
+      const userId = await getUserIdOrRedirect();
+
+      await prisma.favorite.create({
+        data: {
           clerkId: userId,
           productId,
         },
@@ -50,7 +67,7 @@ export const toggleFavorite = async ({
 
     return {
       status: "SUCCESS",
-      message: isFavorite ? "Added to favorites" : "Removed from favorites",
+      message: id ? "Removed from favorites" : "Added to favorites",
     };
   } catch (e) {
     return renderError(e);
