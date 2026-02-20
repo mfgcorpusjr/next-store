@@ -6,7 +6,7 @@ import prisma from "@/lib/prisma";
 import { renderError, uploadImage } from "@/utils/actions";
 import { createProductSchema } from "@/features/product/utils/schemas";
 
-export const getProducts = async (search: string) => {
+export const getProducts = async (search: string = "") => {
   const products = await prisma.product.findMany({
     where: {
       OR: [
