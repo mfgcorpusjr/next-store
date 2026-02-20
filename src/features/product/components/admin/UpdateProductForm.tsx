@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import FormInput from "@/components/form/FormInput";
 import FormTextarea from "@/components/form/FormTextarea";
 import FormCheckbox from "@/components/form/FormCheckbox";
@@ -34,34 +35,46 @@ export default function UpdateProductForm({ product }: UpdateProductFormProps) {
   });
 
   return (
-    <form
-      className="space-y-4"
-      onSubmit={form.handleSubmit((formData: UpdateProductFormData) =>
-        handleUpdateProduct({ id: product.id, formData }),
-      )}
-    >
-      <div className="grid md:grid-cols-2 gap-4">
-        <FormInput name="name" control={form.control} label="Name" />
+    <Card>
+      <CardHeader>
+        <CardTitle>Update Product</CardTitle>
+      </CardHeader>
 
-        <FormInput name="company" control={form.control} label="Company" />
+      <CardContent>
+        <form
+          className="space-y-4"
+          onSubmit={form.handleSubmit((formData: UpdateProductFormData) =>
+            handleUpdateProduct({ id: product.id, formData }),
+          )}
+        >
+          <div className="grid md:grid-cols-2 gap-4">
+            <FormInput name="name" control={form.control} label="Name" />
 
-        <FormInput
-          name="price"
-          control={form.control}
-          label="Price ($)"
-          type="number"
-        />
-      </div>
+            <FormInput name="company" control={form.control} label="Company" />
 
-      <FormTextarea
-        name="description"
-        control={form.control}
-        label="Description"
-      />
+            <FormInput
+              name="price"
+              control={form.control}
+              label="Price ($)"
+              type="number"
+            />
+          </div>
 
-      <FormCheckbox name="isFeatured" control={form.control} label="Featured" />
+          <FormTextarea
+            name="description"
+            control={form.control}
+            label="Description"
+          />
 
-      <SubmitButton isPending={isPending}>Submit</SubmitButton>
-    </form>
+          <FormCheckbox
+            name="isFeatured"
+            control={form.control}
+            label="Featured"
+          />
+
+          <SubmitButton isPending={isPending}>Submit</SubmitButton>
+        </form>
+      </CardContent>
+    </Card>
   );
 }

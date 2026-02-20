@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import FormInput from "@/components/form/FormInput";
 import FormInputFile from "@/components/form/FormInputFile";
 import FormTextarea from "@/components/form/FormTextarea";
@@ -31,39 +32,51 @@ export default function CreateProductForm() {
   });
 
   return (
-    <form
-      className="space-y-4"
-      onSubmit={form.handleSubmit(handleCreateProduct)}
-    >
-      <div className="grid md:grid-cols-2 gap-4">
-        <FormInput name="name" control={form.control} label="Name" />
+    <Card>
+      <CardHeader>
+        <CardTitle>Create Product</CardTitle>
+      </CardHeader>
 
-        <FormInput name="company" control={form.control} label="Company" />
+      <CardContent>
+        <form
+          className="space-y-4"
+          onSubmit={form.handleSubmit(handleCreateProduct)}
+        >
+          <div className="grid md:grid-cols-2 gap-4">
+            <FormInput name="name" control={form.control} label="Name" />
 
-        <FormInput
-          name="price"
-          control={form.control}
-          label="Price ($)"
-          type="number"
-        />
+            <FormInput name="company" control={form.control} label="Company" />
 
-        <FormInputFile
-          name="image"
-          control={form.control}
-          label="Image"
-          accept="image/*"
-        />
-      </div>
+            <FormInput
+              name="price"
+              control={form.control}
+              label="Price ($)"
+              type="number"
+            />
 
-      <FormTextarea
-        name="description"
-        control={form.control}
-        label="Description"
-      />
+            <FormInputFile
+              name="image"
+              control={form.control}
+              label="Image"
+              accept="image/*"
+            />
+          </div>
 
-      <FormCheckbox name="isFeatured" control={form.control} label="Featured" />
+          <FormTextarea
+            name="description"
+            control={form.control}
+            label="Description"
+          />
 
-      <SubmitButton isPending={isPending}>Submit</SubmitButton>
-    </form>
+          <FormCheckbox
+            name="isFeatured"
+            control={form.control}
+            label="Featured"
+          />
+
+          <SubmitButton isPending={isPending}>Submit</SubmitButton>
+        </form>
+      </CardContent>
+    </Card>
   );
 }
