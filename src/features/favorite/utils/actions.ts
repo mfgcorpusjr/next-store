@@ -3,10 +3,10 @@
 import { revalidatePath } from "next/cache";
 
 import prisma from "@/lib/prisma";
-import { getUserIdOrRedirect, renderError } from "@/utils/actions";
+import { getUserOrRedirect, renderError } from "@/utils/actions";
 
 export const getFavorite = async (productId: string) => {
-  const userId = await getUserIdOrRedirect();
+  const { id: userId } = await getUserOrRedirect();
 
   const favorite = await prisma.favorite.findFirst({
     where: {
@@ -19,7 +19,7 @@ export const getFavorite = async (productId: string) => {
 };
 
 export const getFavorites = async () => {
-  const userId = await getUserIdOrRedirect();
+  const { id: userId } = await getUserOrRedirect();
 
   const favorites = await prisma.favorite.findMany({
     include: {
@@ -53,7 +53,7 @@ export const toggleFavorite = async ({
         },
       });
     } else {
-      const userId = await getUserIdOrRedirect();
+      const { id: userId } = await getUserOrRedirect();
 
       await prisma.favorite.create({
         data: {

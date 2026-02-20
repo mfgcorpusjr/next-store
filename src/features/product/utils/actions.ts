@@ -95,9 +95,7 @@ export const updateProduct = async ({
     const validatedData = updateProductSchema.parse(formData);
 
     await prisma.product.update({
-      data: {
-        ...validatedData,
-      },
+      data: validatedData,
       where: {
         id,
       },
