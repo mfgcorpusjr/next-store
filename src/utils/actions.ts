@@ -1,6 +1,18 @@
+import { redirect } from "next/navigation";
 import { ZodError } from "zod";
+import { auth } from "@clerk/nextjs/server";
 
 import supabase from "@/lib/supabase";
+
+export const getUserIdOrRedirect = async () => {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return redirect("/");
+  }
+
+  return userId;
+};
 
 export const renderError = (error: unknown) => {
   if (error instanceof ZodError) {
