@@ -26,7 +26,13 @@ export default function ToggleFavoriteButton({
       disabled={isPending}
       onClick={() => handleToggleFavorite({ id, productId })}
     >
-      {isPending ? <Spinner /> : id ? <IoHeartSharp /> : <IoHeartOutline />}
+      {isPending ? (
+        <Spinner />
+      ) : id ? (
+        <IoHeartSharp className="text-primary" />
+      ) : (
+        <IoHeartOutline />
+      )}
     </Button>
   );
 }
