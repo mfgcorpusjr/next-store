@@ -67,7 +67,13 @@ export const getProductRating = async (productId: string) => {
     },
   });
 
-  // TODO
+  return rating.reduce(
+    (acc, item) => ({
+      average: item._avg.rating || 0,
+      count: item._count.rating || 0,
+    }),
+    { average: 0, count: 0 } as { average: number; count: number },
+  );
 };
 
 export const createReview = async ({
