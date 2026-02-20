@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import prisma from "@/lib/prisma";
 import { getUserOrRedirect, renderError } from "@/utils/actions";
 import {
@@ -90,6 +92,8 @@ export const createReview = async ({
       },
     });
 
+    revalidatePath(`/products/${productId}`);
+
     return {
       status: "SUCCESS",
       message: "Review created",
@@ -109,6 +113,8 @@ export const deleteReview = async (id: string) => {
         id,
       },
     });
+
+    revalidatePath("/reviews");
 
     return {
       status: "SUCCESS",

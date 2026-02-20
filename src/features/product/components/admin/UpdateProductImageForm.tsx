@@ -45,7 +45,7 @@ export default function UpdateProductImageForm({
         className="size-48 object-cover rounded"
       />
 
-      <div className="inline-block">
+      <div className="w-full max-w-96">
         <FormInputFile
           name="image"
           control={form.control}

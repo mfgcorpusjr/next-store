@@ -14,9 +14,9 @@ type ToggleFavoriteButtonContainerProps = {
 export default async function ToggleFavoriteButtonContainer({
   productId,
 }: ToggleFavoriteButtonContainerProps) {
-  const { userId } = await auth();
+  const { isAuthenticated } = await auth();
 
-  if (!userId) {
+  if (!isAuthenticated) {
     return (
       <SignInButton mode="modal">
         <Button variant="outline" size="icon-sm" className="cursor-pointer">

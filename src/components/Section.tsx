@@ -15,7 +15,7 @@ export default function Section({
     <div className="space-y-8">
       <SectionTitle title={title} rightContent={rightContent} />
 
-      {children}
+      <div>{children}</div>
     </div>
   );
 }
