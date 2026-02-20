@@ -8,6 +8,7 @@ import { renderError, uploadImage, deleteImage } from "@/utils/actions";
 import {
   createProductSchema,
   updateProductSchema,
+  updateProductImageSchema,
   UpdateProductFormData,
 } from "@/features/product/utils/schemas";
 
@@ -105,6 +106,44 @@ export const updateProduct = async ({
     return {
       status: "SUCCESS",
       message: "Product updated",
+    };
+  } catch (e) {
+    return renderError(e);
+  }
+};
+
+export const updateProductImage = async ({
+  id,
+  formData,
+}: {
+  id: string;
+  formData: FormData;
+}) => {
+  try {
+    const product = await getProduct(id);
+
+    const validatedData = updateProductImageSchema.parse(
+      Object.fromEntries(formData),
+    );
+
+    const image = await uploadImage({
+      image: validatedData.image,
+    });
+
+    await prisma.product.update({
+      data: {
+        image,
+      },
+      where: {
+        id,
+      },
+    });
+
+    await deleteImage({ imagePath: product.image });
+
+    return {
+      status: "SUCCESS",
+      message: "Product image updated",
     };
   } catch (e) {
     return renderError(e);

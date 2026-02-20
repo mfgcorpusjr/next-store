@@ -94,3 +94,18 @@ export const updateProductSchema = z.object({
 });
 
 export type UpdateProductFormData = z.infer<typeof updateProductSchema>;
+
+export const updateProductImageSchema = z.object({
+  image: z
+    .instanceof(File, { error: "Image is required" })
+    .refine((file) => file.size <= MAX_FILE_SIZE, {
+      message: "Max file size is 3MB",
+    })
+    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), {
+      message: "Only .jpg, .jpeg, .png and .webp formats are supported",
+    }),
+});
+
+export type UpdateProductImageFormData = z.infer<
+  typeof updateProductImageSchema
+>;

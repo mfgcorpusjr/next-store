@@ -8,6 +8,7 @@ import FormInput from "@/components/form/FormInput";
 import FormTextarea from "@/components/form/FormTextarea";
 import FormCheckbox from "@/components/form/FormCheckbox";
 import SubmitButton from "@/components/form/SubmitButton";
+import UpdateProductImageForm from "@/features/product/components/admin/UpdateProductImageForm";
 
 import { Product } from "@/generated/prisma/client";
 import {
@@ -40,7 +41,9 @@ export default function UpdateProductForm({ product }: UpdateProductFormProps) {
         <CardTitle>Update Product</CardTitle>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="space-y-16">
+        <UpdateProductImageForm product={product} />
+
         <form
           className="space-y-4"
           onSubmit={form.handleSubmit((formData: UpdateProductFormData) =>
