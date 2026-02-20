@@ -32,7 +32,7 @@ export default function CreateProductForm() {
   });
 
   return (
-    <Card>
+    <Card className="shadow-none">
       <CardHeader>
         <CardTitle>Create Product</CardTitle>
       </CardHeader>

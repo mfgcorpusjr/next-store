@@ -36,7 +36,7 @@ export default function UpdateProductForm({ product }: UpdateProductFormProps) {
   });
 
   return (
-    <Card>
+    <Card className="shadow-none">
       <CardHeader>
         <CardTitle>Update Product</CardTitle>
       </CardHeader>

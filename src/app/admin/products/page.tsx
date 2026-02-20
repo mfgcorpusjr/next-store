@@ -25,7 +25,7 @@ export default async function ProductsPage() {
   const products = await getProducts();
 
   return (
-    <Card>
+    <Card className="shadow-none">
       <CardContent>
         <Table>
           <TableCaption>Total Products: {products.length}</TableCaption>

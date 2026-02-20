@@ -7,6 +7,7 @@ import ProductRating from "@/features/product/components/ProductRating";
 import ShareProduct from "@/features/product/components/ShareProduct";
 import AddToCartButton from "@/features/cart/components/AddToCartButton";
 import CreateReviewFormContainer from "@/features/review/components/CreateReviewFormContainer";
+import ProductReviews from "@/features/review/components/ProductReviews";
 
 import { getProduct } from "@/features/product/utils/actions";
 import { formatCurrency } from "@/utils/format";
@@ -80,6 +81,8 @@ export default async function ProductDetailsPage({
           </div>
         </div>
       </div>
+
+      <ProductReviews productId={productId} />
 
       <CreateReviewFormContainer productId={productId} />
     </div>
