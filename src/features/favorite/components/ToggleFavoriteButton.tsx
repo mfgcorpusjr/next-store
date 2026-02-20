@@ -20,7 +20,7 @@ export default function ToggleFavoriteButton({
 
   return (
     <Button
-      variant="secondary"
+      variant="outline"
       size="icon-sm"
       className="cursor-pointer"
       disabled={isPending}

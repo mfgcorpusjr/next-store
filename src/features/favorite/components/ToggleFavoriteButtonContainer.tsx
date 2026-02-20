@@ -19,7 +19,7 @@ export default async function ToggleFavoriteButtonContainer({
   if (!userId) {
     return (
       <SignInButton mode="modal">
-        <Button variant="secondary" size="icon-sm" className="cursor-pointer">
+        <Button variant="outline" size="icon-sm" className="cursor-pointer">
           <IoHeartOutline />
         </Button>
       </SignInButton>

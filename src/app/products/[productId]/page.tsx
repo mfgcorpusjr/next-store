@@ -4,6 +4,7 @@ import Image from "next/image";
 import ProductBreadcrumb from "@/features/product/components/ProductBreadcrumb";
 import ToggleFavoriteButtonContainer from "@/features/favorite/components/ToggleFavoriteButtonContainer";
 import ProductRating from "@/features/product/components/ProductRating";
+import ShareProduct from "@/features/product/components/ShareProduct";
 import AddToCartButton from "@/features/cart/components/AddToCartButton";
 
 import { getProduct } from "@/features/product/utils/actions";
@@ -56,6 +57,8 @@ export default async function ProductDetailsPage({
               </h4>
 
               <ToggleFavoriteButtonContainer productId={product.id} />
+
+              <ShareProduct id={product.id} name={product.name} />
             </div>
 
             <ProductRating productId={product.id} />
