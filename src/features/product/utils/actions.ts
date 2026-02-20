@@ -5,7 +5,11 @@ import { revalidatePath } from "next/cache";
 
 import prisma from "@/lib/prisma";
 import { renderError, uploadImage } from "@/utils/actions";
-import { createProductSchema } from "@/features/product/utils/schemas";
+import {
+  createProductSchema,
+  updateProductSchema,
+  UpdateProductFormData,
+} from "@/features/product/utils/schemas";
 
 export const getProducts = async (search: string = "") => {
   const products = await prisma.product.findMany({
@@ -73,6 +77,34 @@ export const createProduct = async (formData: FormData) => {
     return {
       status: "SUCCESS",
       message: "Product created",
+    };
+  } catch (e) {
+    return renderError(e);
+  }
+};
+
+export const updateProduct = async ({
+  id,
+  formData,
+}: {
+  id: string;
+  formData: UpdateProductFormData;
+}) => {
+  try {
+    const validatedData = updateProductSchema.parse(formData);
+
+    await prisma.product.update({
+      data: {
+        ...validatedData,
+      },
+      where: {
+        id,
+      },
+    });
+
+    return {
+      status: "SUCCESS",
+      message: "Product updated",
     };
   } catch (e) {
     return renderError(e);
