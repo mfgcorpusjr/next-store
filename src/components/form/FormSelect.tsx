@@ -15,7 +15,7 @@ type FormSelectProps = {
   control: Control<any>;
   label?: string;
   items: { value: string; label: string }[];
-} & ComponentProps<typeof SelectValue>;
+} & ComponentProps<typeof Select>;
 
 export default function FormSelect({
   name,
@@ -33,12 +33,13 @@ export default function FormSelect({
           {label && <FieldLabel htmlFor={name}>{label}</FieldLabel>}
 
           <Select
+            {...rest}
             {...field}
             value={field.value ?? ""}
             onValueChange={field.onChange}
           >
             <SelectTrigger id={name} aria-invalid={fieldState.invalid}>
-              <SelectValue {...rest} />
+              <SelectValue />
             </SelectTrigger>
 
             <SelectContent>
