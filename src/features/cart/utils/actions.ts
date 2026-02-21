@@ -90,6 +90,25 @@ const createCartItem = async ({
   }
 };
 
+const deleteCartIfEmpty = async (cartId: string) => {
+  try {
+    const cart = await prisma.cart.findUnique({
+      include: {
+        cartItems: true,
+      },
+      where: {
+        id: cartId,
+      },
+    });
+
+    if (cart?.cartItems.length === 0) {
+      await prisma.cart.delete({ where: { id: cartId } });
+    }
+  } catch (e) {
+    throw new Error("Failed to delete cart");
+  }
+};
+
 export const updateCartItem = async ({
   productId,
   action,
@@ -122,11 +141,7 @@ export const updateCartItem = async ({
     } else {
       if (cartItem.quantity === 1) {
         await prisma.cartItem.delete({ where: { id: cartItem.id } });
-
-        const userCart = await getUserCart();
-        if (userCart?.cartItems.length === 0) {
-          await prisma.cart.delete({ where: { id: cart.id } });
-        }
+        await deleteCartIfEmpty(cart.id);
       } else {
         await prisma.cartItem.update({
           data: {
@@ -143,7 +158,33 @@ export const updateCartItem = async ({
 
     return {
       status: "SUCCESS",
-      message: action === "INCREMENT" ? "Added to cart" : "Removed from cart",
+      message: "Cart updated",
+    };
+  } catch (e) {
+    return renderError(e);
+  }
+};
+
+export const deleteCartItem = async ({
+  cartId,
+  cartItemId,
+}: {
+  cartId: string;
+  cartItemId: string;
+}) => {
+  try {
+    await prisma.cartItem.delete({
+      where: {
+        id: cartItemId,
+      },
+    });
+    await deleteCartIfEmpty(cartId);
+
+    revalidatePath("/cart");
+
+    return {
+      status: "SUCCESS",
+      message: "Cart updated",
     };
   } catch (e) {
     return renderError(e);
