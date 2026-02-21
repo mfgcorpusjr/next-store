@@ -5,7 +5,7 @@ import ProductBreadcrumb from "@/features/product/components/ProductBreadcrumb";
 import ToggleFavoriteButtonContainer from "@/features/favorite/components/ToggleFavoriteButtonContainer";
 import ProductRating from "@/features/product/components/ProductRating";
 import ShareProduct from "@/features/product/components/ShareProduct";
-import AddToCartButton from "@/features/cart/components/AddToCartButton";
+import AddToCartButtonContainer from "@/features/cart/components/AddToCartButtonContainer";
 import CreateReviewFormContainer from "@/features/review/components/CreateReviewFormContainer";
 import ProductReviews from "@/features/review/components/ProductReviews";
 
@@ -77,7 +77,7 @@ export default async function ProductDetailsPage({
               {product.description}
             </p>
 
-            <AddToCartButton productId={product.id} />
+            <AddToCartButtonContainer productId={product.id} />
           </div>
         </div>
       </div>
