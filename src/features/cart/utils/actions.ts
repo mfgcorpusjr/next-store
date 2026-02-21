@@ -90,19 +90,19 @@ const createCartItem = async ({
   }
 };
 
-const deleteCartIfEmpty = async (cartId: string) => {
+const deleteCartIfEmpty = async (id: string) => {
   try {
     const cart = await prisma.cart.findUnique({
       include: {
         cartItems: true,
       },
       where: {
-        id: cartId,
+        id,
       },
     });
 
     if (cart?.cartItems.length === 0) {
-      await prisma.cart.delete({ where: { id: cartId } });
+      await prisma.cart.delete({ where: { id } });
     }
   } catch (e) {
     throw new Error("Failed to delete cart");
@@ -140,8 +140,10 @@ export const updateCartItem = async ({
       });
     } else {
       if (cartItem.quantity === 1) {
-        await prisma.cartItem.delete({ where: { id: cartItem.id } });
-        await deleteCartIfEmpty(cart.id);
+        const deletedCartItem = await prisma.cartItem.delete({
+          where: { id: cartItem.id },
+        });
+        await deleteCartIfEmpty(deletedCartItem.cartId);
       } else {
         await prisma.cartItem.update({
           data: {
@@ -165,20 +167,15 @@ export const updateCartItem = async ({
   }
 };
 
-export const deleteCartItem = async ({
-  cartId,
-  cartItemId,
-}: {
-  cartId: string;
-  cartItemId: string;
-}) => {
+export const deleteCartItem = async (id: string) => {
   try {
-    await prisma.cartItem.delete({
+    const cartItem = await prisma.cartItem.delete({
       where: {
-        id: cartItemId,
+        id,
       },
     });
-    await deleteCartIfEmpty(cartId);
+
+    await deleteCartIfEmpty(cartItem.cartId);
 
     revalidatePath("/cart");
 
