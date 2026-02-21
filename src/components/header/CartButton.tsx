@@ -15,7 +15,7 @@ export default async function CartButton() {
       <Link href="/cart">
         <LucideShoppingCart />
 
-        {count && <Badge className="absolute -top-3 -right-3">{count}</Badge>}
+        {!!count && <Badge className="absolute -top-3 -right-3">{count}</Badge>}
       </Link>
     </Button>
   );

@@ -5,6 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 
 import prisma from "@/lib/prisma";
 import { getUserOrRedirect, renderError } from "@/utils/actions";
+import { Action } from "@/features/cart/utils/types";
 
 export const getCart = async () => {
   const { userId } = await auth();
@@ -69,7 +70,7 @@ export const updateCartItem = async ({
   action,
 }: {
   productId: string;
-  action: "INCREMENT" | "DECREMENT";
+  action: Action;
 }) => {
   const { id: userId } = await getUserOrRedirect();
 
