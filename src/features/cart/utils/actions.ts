@@ -7,7 +7,7 @@ import prisma from "@/lib/prisma";
 import { getUserOrRedirect, renderError } from "@/utils/actions";
 import { Action } from "@/features/cart/utils/types";
 
-export const getCart = async () => {
+export const getUserCart = async () => {
   const { userId } = await auth();
 
   if (!userId) return null;
@@ -28,13 +28,21 @@ export const getCart = async () => {
   return cart;
 };
 
-const createCart = async () => {
-  const { id } = await getUserOrRedirect();
+const getCart = async (userId: string) => {
+  const cart = await prisma.cart.findFirst({
+    where: {
+      clerkId: userId,
+    },
+  });
 
+  return cart;
+};
+
+const createCart = async (userId: string) => {
   try {
     const cart = await prisma.cart.create({
       data: {
-        clerkId: id,
+        clerkId: userId,
       },
     });
 
@@ -42,6 +50,23 @@ const createCart = async () => {
   } catch (e) {
     throw new Error("Failed to create cart");
   }
+};
+
+const getCartItem = async ({
+  cartId,
+  productId,
+}: {
+  cartId: string;
+  productId: string;
+}) => {
+  const cartItem = await prisma.cartItem.findFirst({
+    where: {
+      cartId,
+      productId,
+    },
+  });
+
+  return cartItem;
 };
 
 const createCartItem = async ({
@@ -75,23 +100,12 @@ export const updateCartItem = async ({
   const { id: userId } = await getUserOrRedirect();
 
   try {
-    let cart = await prisma.cart.findFirst({
-      where: {
-        clerkId: userId,
-      },
-    });
-
+    let cart = await getCart(userId);
     if (!cart) {
-      cart = await createCart();
+      cart = await createCart(userId);
     }
 
-    let cartItem = await prisma.cartItem.findFirst({
-      where: {
-        cartId: cart.id,
-        productId,
-      },
-    });
-
+    let cartItem = await getCartItem({ cartId: cart.id, productId });
     if (!cartItem) {
       cartItem = await createCartItem({ cartId: cart.id, productId });
     }
@@ -108,6 +122,11 @@ export const updateCartItem = async ({
     } else {
       if (cartItem.quantity === 1) {
         await prisma.cartItem.delete({ where: { id: cartItem.id } });
+
+        const userCart = await getUserCart();
+        if (userCart?.cartItems.length === 0) {
+          await prisma.cart.delete({ where: { id: cart.id } });
+        }
       } else {
         await prisma.cartItem.update({
           data: {
