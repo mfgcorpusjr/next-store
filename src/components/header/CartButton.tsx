@@ -4,13 +4,18 @@ import { LucideShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-export default function CartButton() {
+import { getCart } from "@/features/cart/utils/actions";
+
+export default async function CartButton() {
+  const cart = await getCart();
+  const count = cart?.cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
     <Button asChild variant="outline" size="icon" className="relative">
       <Link href="/cart">
         <LucideShoppingCart />
 
-        <Badge className="absolute -top-3 -right-3">0</Badge>
+        {count && <Badge className="absolute -top-3 -right-3">{count}</Badge>}
       </Link>
     </Button>
   );
