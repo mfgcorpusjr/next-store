@@ -10,7 +10,9 @@ const useDeleteCartItem = () => {
     startTransition(async () => {
       const res = await deleteCartItem(cartItemId);
 
-      if (res.status === "FAILED") {
+      if (res.status === "SUCCESS") {
+        toast.success(res.message);
+      } else {
         toast.error(res.message);
       }
     });

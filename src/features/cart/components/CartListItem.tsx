@@ -1,8 +1,7 @@
 import Image from "next/image";
-import { LucideMinus, LucidePlus } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import UpdateCartItemButtons from "@/features/cart/components/UpdateCartItemButtons";
 import DeleteCartItemButton from "@/features/cart/components/DeleteCartItemButton";
 
 import { CartItem, Product } from "@/generated/prisma/client";
@@ -34,17 +33,10 @@ export default function CartListItem({ cartItem }: CartListItemProps) {
           </p>
         </div>
 
-        <div className="flex items-center gap-4">
-          <Button size="icon-sm" className="cursor-pointer">
-            <LucideMinus />
-          </Button>
-
-          <div className="font-semibold">{cartItem.quantity}</div>
-
-          <Button size="icon-sm" className="cursor-pointer">
-            <LucidePlus />
-          </Button>
-        </div>
+        <UpdateCartItemButtons
+          productId={cartItem.productId}
+          quantity={cartItem.quantity}
+        />
 
         <div>{formatCurrency(cartItem.product.price)}</div>
 

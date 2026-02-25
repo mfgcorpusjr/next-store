@@ -10,6 +10,8 @@ export default async function CartList() {
     return <EmptyList />;
   }
 
+  cart.cartItems.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+
   return (
     <div className="flex flex-col gap-8">
       {cart.cartItems.map((cartItem) => (
