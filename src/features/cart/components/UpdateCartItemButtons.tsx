@@ -19,7 +19,7 @@ export default function UpdateCartItemButtons({
   const { isPending, handleUpdate } = useUpdateCartItem();
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-2">
       <Button
         size="icon-sm"
         className="cursor-pointer"
@@ -29,8 +29,8 @@ export default function UpdateCartItemButtons({
         <LucideMinus />
       </Button>
 
-      <div className="font-semibold">
-        {isPending ? <Spinner data-icon="inline-start" /> : quantity}
+      <div className="w-8 text-center font-semibold">
+        {isPending ? <Spinner className="mx-auto" /> : quantity}
       </div>
 
       <Button
