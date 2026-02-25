@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { LucideMinus, LucidePlus, LucideTrash2 } from "lucide-react";
+import { LucideMinus, LucidePlus } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import DeleteCartItemButton from "@/features/cart/components/DeleteCartItemButton";
 
 import { CartItem, Product } from "@/generated/prisma/client";
 import { formatCurrency } from "@/utils/format";
@@ -47,9 +48,7 @@ export default function CartListItem({ cartItem }: CartListItemProps) {
 
         <div>{formatCurrency(cartItem.product.price)}</div>
 
-        <Button variant="destructive" size="icon-sm" className="cursor-pointer">
-          <LucideTrash2 />
-        </Button>
+        <DeleteCartItemButton cartItemId={cartItem.id} />
       </CardContent>
     </Card>
   );
