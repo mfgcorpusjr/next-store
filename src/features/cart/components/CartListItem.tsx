@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -15,18 +16,24 @@ export default function CartListItem({ cartItem }: CartListItemProps) {
   return (
     <Card className="shadow-none">
       <CardContent className="flex flex-col md:flex-row items-center gap-8">
-        <Image
-          src={cartItem.product.image}
-          alt={cartItem.product.name}
-          width={128}
-          height={128}
-          className="size-32 md:size-16 object-cover rounded"
-        />
+        <Link href={`/products/${cartItem.productId}`}>
+          <Image
+            src={cartItem.product.image}
+            alt={cartItem.product.name}
+            width={128}
+            height={128}
+            loading="eager"
+            className="size-32 md:size-16 object-cover rounded"
+          />
+        </Link>
 
         <div className="flex-1 flex flex-col items-center md:items-start gap-2">
-          <h4 className="text-sm font-semibold line-clamp-1">
+          <Link
+            href={`/products/${cartItem.productId}`}
+            className="text-sm font-semibold line-clamp-1"
+          >
             {cartItem.product.name}
-          </h4>
+          </Link>
 
           <p className="text-xs text-muted-foreground line-clamp-1">
             {cartItem.product.company}

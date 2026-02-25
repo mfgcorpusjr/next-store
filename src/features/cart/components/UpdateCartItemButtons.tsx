@@ -29,7 +29,7 @@ export default function UpdateCartItemButtons({
         <LucideMinus />
       </Button>
 
-      <div className="w-8 text-center font-semibold">
+      <div className="w-8 text-center">
         {isPending ? <Spinner className="mx-auto" /> : quantity}
       </div>
 

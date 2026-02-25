@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import Section from "@/components/Section";
 import CartList from "@/features/cart/components/CartList";
-import CartTotals from "@/features/cart/components/CartTotals";
+import CartTotal from "@/features/cart/components/CartTotal";
 
 export const metadata: Metadata = {
   title: "Cart",
@@ -17,7 +17,7 @@ export default function CartPage() {
         </div>
 
         <div className="lg:col-span-4">
-          <CartTotals />
+          <CartTotal />
         </div>
       </div>
     </Section>
